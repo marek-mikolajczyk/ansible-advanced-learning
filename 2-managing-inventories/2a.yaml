@@ -1,6 +1,0 @@
-all:
-  ungrouped.marekexample.com: 
-    smtp: dupa
-  children:
-    mailserver:
-      mail.lab.example.com:
