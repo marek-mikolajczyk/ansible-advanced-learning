@@ -1,0 +1,43 @@
+vi:
+set et ts=2 sts=2 sw=2
+set paste
+
+clean yaml
+- : not = long lines
+- modules instead of shell
+- clear variables name 
+- vars namespace
+- dynamic inventories, group_by
+- duplicated group vars - last wins
+- use block to rescue
+- tools: ansible-lint, yamllint
+project structured
+.
+├── dbservers.yml
+├── inventories/
+│ ├── prod/
+│ │ ├── group_vars/
+│ │ ├── host_vars/
+│ │ └── inventory/
+│ └── stage/
+│ ├── group_vars/
+│ ├── host_vars/
+│ └── inventory/
+├── roles/
+│ └── std_server/
+├── site.yml
+├── storage.yml
+└── webservers.yml
+
+git 
+modified - modified, different from git
+staged - ready to commit
+commited
+
+
+configure git
+git config --global
+
+git init --bare --shared=true - no working tree
+
+git status
