@@ -2,9 +2,9 @@ group1:
   hosts:
     host1:
       vars:
-        ntp: dupa
+        ntp: ntphost1
     host2:
       vars:
-        ntp: onet
+        ntp: ntphost2
   vars:
   children:
