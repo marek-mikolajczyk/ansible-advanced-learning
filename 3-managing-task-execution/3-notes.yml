@@ -1,0 +1,136 @@
+# privilege escalation
+- ansible.cfg  [privilege_escalation]/become{,_method,_user}
+- CLI overrides ansible.cfg
+- play/task/block level overrides global become in playbook. {{ ansible_user_id }}
+- roles - in playbook or when calling role
+   roles:
+     - role: roletest
+       become: true
+- [strongest] with connection variables in inventory or in play vars: - add ansible_become
+
+best practices: 
+- keep minimum priviledge - disable become on play, activate in specific tasks
+- group become tasks in block 
+- set become: true on play level, and task become: false when not needed
+- ansible_become_method in inventory for groups of hosts, and enable/disable become in playbook
+- ansible_user_id var to show effetive user
+- you can wrap handlers in a block to add become
+
+
+# order of execution
+# in below case, roles are played 1st then tasks 2nd:
+# ANSIBLE RUNS HANDLERS AS THEYRE LISTED IN handlers.yml , NOT AS THEY WERE NOTIFIED
+hosts:
+  pre_tasks:
+  # handlers notified by pre_tasks 
+  roles:
+  tasks:
+  # handlers notified by roles, tasks
+  post_tasks:
+  # handlers notified by post_tasks
+  handlers:
+
+# notify handlers earlier:
+- name: notify handlers at now
+  meta: flush_handlers
+
+# import vs exclude 
+- include role when: false - it wont be included, but import will be
+- role can be inc/imp in tasks by:
+tasks:
+   - name: aaa
+     include_  role: role1
+
+
+# handlers
+
+- handlers subscription
+  handlers can subscribe to notification, so we trigger notification. 
+  one notification can contain multiple handlers
+  better to change duplicated name of handlers and use :listen
+- handler needs to be defined in static include, not dynamic include
+
+
+
+# task: aaa
+# notify: my handlers 
+
+# handlers: 
+#   - name: h1
+#     listen: my handlers
+#   - name: h2
+#     listen: my handlers
+
+# include handlers
+#- name: Trigger an included (dynamic) handler
+#  hosts: localhost
+#  handlers:
+#    - name: Restart services
+#      include_tasks: restarts.yml
+
+# how task can notify multiple handlers 
+- list of handlers
+- listen
+
+# what is force_handlers ?
+# task force handler. if later task fail, handlers will still run. in ansible.cfg or play
+
+# host order: 
+- name: my playbook
+  hosts: all
+  order: xxx
+
+- inventory (default)
+- reverse_inventory
+- sorted
+- reverse_sorted 
+- suffle
+
+
+
+
+
+
+
+# tags
+
+- apply to tasks, roles, blocks
+#   include_tasks:
+#   tags: 
+#     - a
+#     - b
+roles:
+- { role: databases, tags: ['production', 'staging'] }
+
+- directives:
+--tags never
+--skip-tags, --skip-tags always
+--list-tags
+
+SPECIAL TAGS: 
+- always - will always run even if tags don't match
+  exception --skip-tags always
+- never
+  exception --tags never
+- tagged
+- untagged
+- all (default ansible behaviour)
+
+
+# optimize for speed
+- disable fact gathering
+- use forks (cli -f or ansible.cfg) (no. of processes)
+- avoid loops with yum
+- synchronize module instead of copy for large amount of hosts
+- template module instead of loop'ed lineinfile
+- ssh connections - ssh args - control master (multiple ssh sessions to use one connection), timed by controlpersist
+- ssh_args = -o ControlMaster=auto -o ControlPersist=60s
+- enable pipelining 
+  disable requiretty in /etc/sudoers: Defaults !requiretty
+  [ssh_connection]/pipelining = True
+
+# callback plugins
+- callback_whitelist in ansible.cfg
+- ansible-doc -t callback -l
+- timer (playbook), profile_{tasks,roles}
+# ??? tower is not compatible with timer and profile_tasks

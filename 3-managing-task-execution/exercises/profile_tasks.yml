@@ -1,0 +1,13 @@
+- name: show profile
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: show uptime
+      shell: uptime
+
+    - name: find tmp
+      shell: find /tmp -name "gen*" -type d
+
+    - name: gather facts
+      setup:
