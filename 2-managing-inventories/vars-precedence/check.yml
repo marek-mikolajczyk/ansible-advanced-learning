@@ -1,0 +1,9 @@
+- name: aaa
+  hosts: all
+  vars:
+    ntp: yahoo.marekexample.com
+  gather_facts: false
+  tasks:
+    - name: show ntp
+      debug:
+        msg: "{{ ntp }}"

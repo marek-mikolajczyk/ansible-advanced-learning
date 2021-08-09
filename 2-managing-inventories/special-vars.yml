@@ -1,0 +1,20 @@
+# https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+- name: train special variables
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: debug
+      debug:
+        msg: |
+          inventory_hostname is "{{ inventory_hostname }}"
+          ansible_host is "{{ ansible_host }}"
+          ansible_config_file is "{{ ansible_config_file }}"
+          ansible_play_hosts is "{{ ansible_play_hosts }}"
+          ansible_play_hosts_all is "{{ ansible_play_hosts }}"
+          ansible_playbook_python os "{{ ansible_playbook_python }}"
+          ansible_verbosity is "{{ ansible_verbosity }}"
+      register: myoutput
+
+    - name: show
+      debug:
+        msg: "{{ query('lines', myoutput.msg ) }}"

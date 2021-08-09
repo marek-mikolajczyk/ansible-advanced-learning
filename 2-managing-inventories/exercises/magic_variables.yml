@@ -1,0 +1,11 @@
+- name: practice magic vars
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: show magic vars
+      debug:
+        msg: |
+          ansible_play_hosts is {{ ansible_play_hosts }}
+          ansible_play_hosts_all is {{ ansible_play_hosts_all }}
+          group_names is "{{ group_names }}"
+          groups is {{ groups }}

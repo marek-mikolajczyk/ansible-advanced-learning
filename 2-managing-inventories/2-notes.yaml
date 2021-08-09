@@ -1,0 +1,67 @@
+ansible.cfg
+
+# enable inventory plugins 
+- [inventory]/enable_plugins
+- ansible tries plugins according to order
+- host_list, script, ini, yaml
+
+# ansible.cfg in world readable dir 
+- export ANSIBLE_CONFIG
+
+# inventory yaml format
+- group has: children, hosts, vars
+- all is not required at the beginning
+
+# dirs for host_vars, group_vars
+- ini to yaml conversion - displays wrongly host vars after export. it works, but it's
+  better to have dirs for host and group vars. otherwise, requires manual checko
+- but ansible_connection or ansible_user easier to keep in inventory
+- vars stay, even if host has groupvar from group2, and playbook calls group2
+
+# to convert: 
+# converting to yaml and keeping vars works better when inventory has group_vars/ and host_vars/
+ansible-inventory -i simple.ini  --list --yaml--output <target file>.yml
+
+#yaml syntax for inventory 
+- uses : as start of block - be careful for unquoted
+  but not:a:problem is okay
+  '' is okay, "" permits \n
+  so use "" when using [] {} > | * & ! % # ` @
+ 
+# inventory vars
+- inventory/host_vars (directory)/firewall.yml
+- if inventory /etc/ansible/hosts, then /etc/ansible/group_vars 
+- ansible_host is real dns/ip
+
+# inventory vars precedence
+
+- extra vars > play vars > facts > playbook vars > inventory vars
+#  role defaults
+#  inventory file for group
+#  inventory group_vars/all
+#  playbook  group_vars/all
+#  inventory group_vars/*
+#  playbook group_vars/*
+#  inventory file for host
+#  inventory host_vars/*
+#  playbook host_vars/*
+#  facts
+# play vars
+# ...
+# extra vars
+
+# vars precedence: 
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+
+
+# special host vars during playbook
+inventory_hostname - currently processes host
+ansible_host - dns or ip used to connect
+ansible_facts['hostname'] or ['fqdn'] collected from fact
+ansible_play_hosts - all not yet failed and will be used for next tasks
+ansible_play_hosts_all - all targeted for play
+ansible_connection - ssh, local for localhost
+group_names - for current host
+groups - all inventory
+
+# https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html

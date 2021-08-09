@@ -1,0 +1,10 @@
+group1:
+  hosts:
+    host1:
+      vars:
+        ntp: dupa
+    host2:
+      vars:
+        ntp: onet
+  vars:
+  children:
