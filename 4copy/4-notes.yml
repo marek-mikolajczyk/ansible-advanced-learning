@@ -100,15 +100,41 @@ replace('ar','**')
 ### lookup plugins
 ########################
 
-file - reads files on controller not remote
-template
-env
-command:
-    # query('lines', '/cat/etc/passwd')
-    # pipe - command output
-lookup_plugins directory with playbook location
-errors: warn/strict/ignore 
+lookups - to use data from external sources
+ansible-doc -t lookup -l
 
+lookup - returns string
+query - returns list
+file  - on control node!
+  - from_yaml, | from_json
+template
+env - on control node!
+command - on control node!
+    query('pipe', 'ls /dev/sd*')
+      - 'pipe'
+     !!!  - 'lines' - this is much better, gives lines
+    # pipe - command output
+# get first line from list of files
+combine query('lines', 'file1', 'file2') as loop input with item[0]
+
+#lookup/query errors handling
+add errorS='warn'/'strict'/'ignore'
+
+!!! use {{ | quote }} after password 
+
+!!! use variables in lookup syntax, ex. 
+"{{ lookup('template','webapp.' + locale + '.j2') }}"
+
+lookup_plugins directory with playbook location
+
+password - generate random password
+    - name: use lookup password
+      debug:
+        msg: |
+          my password is {{ lookup('password', 'credentials/' + item + ' length=3' ) }}
+      loop:
+        - tomek
+        - zosia
 
 ########################
 ### advanced loops

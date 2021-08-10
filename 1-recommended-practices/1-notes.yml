@@ -46,6 +46,9 @@ git status
 git log
 git show <commit hash>
 
+git rev-parse  HEAD - get current commit
+git rev-parse --short HEAD
+
 git rm - deletes file from local dir, and 
 git reset - removes file from staging area
 git revert commit_ref - 
