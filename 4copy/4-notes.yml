@@ -140,35 +140,42 @@ password - generate random password
 ### advanced loops
 ########################
 
-# loop - on flat list
+loop - on flat list
+
 # previously - with_<lookup plugin>
 
 # loop: "{{ mylist }}" = with_list: "{{ mylist }}" = loop: "{{ lookup('list', mylist) }}"
 
 
 ### list of lists = flatten(levels=1)
-# with_items:
-# - list a
-# - list b
-# with_items will flatten it:
-#loop: "{{ list_of_lists | flatten(levels=1) }}"
-#vars:
-#list_of_lists:
-#- "{{ app_a_tmp_files }}"
-#- "{{ app_b_tmp_files }}"
-#- "{{ app_c_tmp_files }}"
+to move from with_items, create new variable with lists inside, the use flatten
+"{{ list_of_lists | flatten(levels=1) }}"
+
+OLD:
+with_items:
+ - list a
+ - list b
+NEW:
+loop: "{{ list_of_lists | flatten(levels=1) }}"
+vars:
+  list_of_lists:
+    - "{{ app_a_tmp_files }}"
+    - "{{ app_b_tmp_files }}"
+    - "{{ app_c_tmp_files }}"
 
 ### list of nested lists (with dictionaries) = subelements
-# traverse nested key from a list of dictionaries
+LDL = subelements
+[{[x]}]
+subelements create single list from lists with nested lists
+it processes list of dictionaries, where each dictionary contains key that refers to list.
+subelements use that key
 # creates list with nested lists
-# to use subelements, you must provide name of key of each dictionary that correspond to a list
-# so you must point to element which is a list
 # - name: john
 # password: "{{ john_pass }}"
 # authorized:
 # - keys/john_key.pub
 ### equivalent to
-# aa: "{{ item.0.name"
+# aa: "{{ item.0.name }}"
 # loop: "{{ users|subelements('authorized') }}"
 
 ### iterate over dictionary - just use | dict2items, and remember item.key and item.value.xxx
@@ -186,11 +193,14 @@ password - generate random password
 #state: present
 #loop: "{{ users | dict2items }}"
 
+summary:
+list of lists - use | flatten(levels=1)
+list of dictionaries with list - use subelements('key')
+dictionaries - use | dict2items
+files with pattern - use query('fileglob', '/tmp/[a-c]')
 
-
-# fileglob - iterate over list of files matching pattern
-# msg: "{{ lookup('fileglob', '~/.bash*') }}" - but this is string
-# msg: "{{ query('fileglob', '~/.bash*') }}" - query will return a list
-# before
-# with_fileglob:
-# - "~/.bash*"
+msg: "{{ lookup('fileglob', '~/.bash*') }}" - but this is string
+msg: "{{ query('fileglob', '~/.bash*') }}" - query will return a list
+before
+ with_fileglob:
+ - "~/.bash*"
