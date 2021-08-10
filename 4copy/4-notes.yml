@@ -1,0 +1,170 @@
+# filters
+list: aaa['0']
+dict: bbb['value'] or bbb.value
+
+# filters from jinja or provided by ansible
+
+# vars
+mandatory
+default('AAA', True) - True if var is empty string or false
+### declare undefined variable
+# null
+# or ~
+
+# single list
+ordered can call list[0]
+my_var[1] == 'ola'
+random 
+unique | list
+sort
+min,max,sum
+lenght,first,last
+#FLATTEN - merge sub lists
+
+# multiple lists
+union
+difference
+intersect
+
+### dictionaries
+combine - join dictionaries
+# called maps or hashes
+# link keys to values 
+# access by dict['key']
+
+
+### mathematics
+# "{{ [1, 2, 3] }}" is eq( [1,2,3])
+
+### my_var is False
+#   my_var | default('44', True)  - my_var is  44
+#   my_var | default('44', False)  - my_var is  False
+
+### my_var is null
+#   my_var | default('44', True)  - my_var is  44
+#   my_var | default('44', False)  - my_var is  ""
+
+### text
+capitalize, string
+quote
+lower, |upper
+replace('ar','**')
+# regex_search('ar\S*r')
+# regex_replace('ar(\S*)r','\\1mb')
+
+### lists
+# unique, sort
+#! map
+#   ansible localhost -m debug -a "msg={{ users | map(attribute='location') | join(',') }}" -e @4map.yaml
+
+### vars
+# mandatory
+# default 
+#   * default(my_default, True) - if initial value was empty or false - it will set to expected
+#   * default(omit) - skips task parameter if not defined
+
+
+### math
+# / - result float
+# // - result integer (not .12345)
+# | int
+# | root
+
+
+### lists
+# | sum, | length
+# | first, | last, | random
+# | sort, | reverse, | shuffle
+# | flatten for nested lists
+# | unique. after lists have no duplicated values, then
+#   | union, |intersect, | difference
+# to dictionary: | items2dict
+
+
+### dictionaries
+# combine - 2nd dictionary has bigger priority
+# to list: | dict2items
+
+# hashing
+# | hash('sha1'), | password_hash('sha512')
+# | b64encode
+
+# json, yaml
+# json_query('[*].name')
+# to_json, to_nice_json
+# to_yaml, to_nice_yaml
+
+
+
+########################
+### lookup plugins
+########################
+
+file - reads files on controller not remote
+template
+env
+command:
+    # query('lines', '/cat/etc/passwd')
+    # pipe - command output
+lookup_plugins directory with playbook location
+errors: warn/strict/ignore 
+
+
+########################
+### advanced loops
+########################
+
+# loop - on flat list
+# previously - with_<lookup plugin>
+
+# loop: "{{ mylist }}" = with_list: "{{ mylist }}" = loop: "{{ lookup('list', mylist) }}"
+
+
+### list of lists = flatten(levels=1)
+# with_items:
+# - list a
+# - list b
+# with_items will flatten it:
+#loop: "{{ list_of_lists | flatten(levels=1) }}"
+#vars:
+#list_of_lists:
+#- "{{ app_a_tmp_files }}"
+#- "{{ app_b_tmp_files }}"
+#- "{{ app_c_tmp_files }}"
+
+### list of nested lists (with dictionaries) = subelements
+# traverse nested key from a list of dictionaries
+# creates list with nested lists
+# to use subelements, you must provide name of key of each dictionary that correspond to a list
+# so you must point to element which is a list
+# - name: john
+# password: "{{ john_pass }}"
+# authorized:
+# - keys/john_key.pub
+### equivalent to
+# aa: "{{ item.0.name"
+# loop: "{{ users|subelements('authorized') }}"
+
+### iterate over dictionary - just use | dict2items, and remember item.key and item.value.xxx
+# to iterate over dict - we need to make it a list
+# before
+#user:
+#name: "{{ item.key }}"
+#comment: "{{ item.value.name }}"
+#state: present
+#with_dict: "{{ users }}"
+# after
+#user:
+#name: "{{ item.key }}"
+#comment: "{{ item.value.name }}"
+#state: present
+#loop: "{{ users | dict2items }}"
+
+
+
+# fileglob - iterate over list of files matching pattern
+# msg: "{{ lookup('fileglob', '~/.bash*') }}" - but this is string
+# msg: "{{ query('fileglob', '~/.bash*') }}" - query will return a list
+# before
+# with_fileglob:
+# - "~/.bash*"
