@@ -5,6 +5,7 @@ set paste
 install:
 - json_pp - for tower api |json_pp chapter 11. rpm: perl-JSON-PP
 - pip install ansible-tower-cli
+- pip install ansible-lint
 
 
 clean yaml

@@ -1,0 +1,32 @@
+### delegating
+
+local_action = delegate to 127.0.0.1
+
+nice example of doing action only on group of servers
+delegate_to: "{{ item }}"
+loop: "{{ groups['lbservers'] }}"
+
+assign facts gathered by task, to to target of delegate_to. use delegate_facts: true
+- hosts: localhost
+ set_fact:
+ myfact: Where am I set?
+delegate_to: servera.lab.example.com
+delegate_facts: True
+debug:
+  msg: "{{ hostvars['servera.lab.example.com']['myfact'] }}"
+
+
+### rolling updates
+batch size - serial: 2/25%, or ['2', '%25']
+last batch size can be 100%
+# if all hosts in current batch fail - playbook fails, no next batch
+active servers for each batch: ansible_play_batch
+failed host is being removed
+this var gets updated after every task
+
+single host in every batch - run_once: yes
+single host per play with batch:
+ - when: inventory_hostname == ansible_play_hosts[0] (awesome)
+
+# failure tolerance
+max_fail_percentage - as play var, per batch

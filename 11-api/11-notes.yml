@@ -3,9 +3,23 @@ handle space in url:
 - %20
 - | urlencode
 
+GET
 POST - sends body to existing resource
 PUT - modify resource 
 PATCH - modify. only listed entities are modified
+DELETE
+
+sent information to api:
+- src - points to file
+- body
+
+uri module parameters:
+body_format - depends
+
+handle api response:
+status_code - which status to expect
+dest - save response to file
+return_content:yes - use response in playbook
 
 curl -X GET (--request)  -s  (--silent) --user user:password https://tower/api/v2/  <-- lookout slash at the end
 curl -X get xxx | json_pp to get better view
