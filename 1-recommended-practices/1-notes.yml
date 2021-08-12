@@ -2,6 +2,11 @@ vi:
 set et ts=2 sts=2 sw=2
 set paste
 
+install:
+- json_pp - for tower api |json_pp chapter 11. rpm: perl-JSON-PP
+- pip install ansible-tower-cli
+
+
 clean yaml
 - : not = long lines
 - modules instead of shell

@@ -1,0 +1,36 @@
+
+handle space in url:
+- %20
+- | urlencode
+
+POST - sends body to existing resource
+PUT - modify resource 
+PATCH - modify. only listed entities are modified
+
+curl -X GET (--request)  -s  (--silent) --user user:password https://tower/api/v2/  <-- lookout slash at the end
+curl -X get xxx | json_pp to get better view
+
+OUTPUT IS PAGINATED - check previous/next
+
+https://tower.marekexample.com/api/v2/users/?username__contains=david
+
+
+# start a job
+curl -k --user admin:password -X POST https://tower.marekexample.com/api/v2/job_templates/5/launch/
+number of job -  field "job" 
+get status of ran job:
+curl -k --user admin:password -X GET  https://tower.marekexample.com/api/v2/jobs/8/ | json_pp
+
+# start job via api from playbook
+- add tower vars
+
+
+# tokens for api
+AT - multiple users, create application
+PAT - private
+
+1. authorize via user/pass to obtain token
+url/force_basic_auth
+register output
+2. use token
+uri/headers and answer['json']['token']
