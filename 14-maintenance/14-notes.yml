@@ -1,0 +1,42 @@
+ansible-tower-service status
+
+supervisorctl status
+
+/etc/tower/settings.py
+
+/var/log/tower 
+- setp from installation
+- task_system - housekeeping
+/var/log/supervisor/supervisord.log
+
+/var/lib/awx
+- projects
+- job_status
+
+problems with jobs
+- check if ansible can launch it
+- perms and ownership of local project
+
+playbooks pending
+- supervisorctl status for resources
+- /var enough space
+
+empty host list
+- host patterns
+- group names no spaces
+
+awx-manage
+- change password
+- create superUSER
+
+
+TLS
+- remember about ownership and permissions (awx, 600)
+- selinux label cert_t
+semanage fcontext -a -t cert_t "/etc/tower/tower.(.*)"
+restorecon -Rv  /etc/tower
+
+DB
+./setup -b makes backup
+./setup -r - restore
+if you forget r - wait for installer to finish, then restore normally
