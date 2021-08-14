@@ -1,0 +1,44 @@
+import static inventory
+1. from file - make chages in tower
+2. from scm - make changes on scm not tower
+  a) update_on_project_change
+
+cli: awx-manage inventory_import
+
+before import, organize directory structure
+inventory/
+|-- group_vars
+| `-- mygroup
+|-- host_vars
+| `-- myhost
+`-- hosts
+
+# import from directory, add not overwrite 
+# inventory must exist in tower
+awx-manage inventory_import --source=inventory/ \
+> --inventory-name="My Tower Inventory"
+
+# import single file,  add not overwrite 
+awx-manage inventory_import --source=./my_inventory_file \
+> --inventory-name="My Tower Inventory"
+
+# overwrite existing data
+awx-manage inventory_import --source=inventory/ \
+> --inventory-name="My Tower Inventory" \
+> --overwrite
+
+
+awx-manage inventory_import --overwrite  --overwrite-vars --source=mytestinv/ --inventory-name=mytestinv
+
+# dynamic inventories
+# custom script inventories
+
+
+
+# smart inventories
+use fact cache on job + gather_facts: true on playbook
+
+filters:
+
+CI/CD
+runners executors: container, vm, local shell, remote server
