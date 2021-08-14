@@ -1,0 +1,33 @@
+# organization TPI:
+- teams
+- projects
+- inventories
+- users must belong to organization
+
+# user types:
+- system administrator (singleton) - read/write - only admin user
+- system auditor - singleton read-only
+- member
+
+# user roles in organization (except member):
+- admin on x / admin inherited from singleton
+- auditor (general) / auditor ingerited from singleton
+- member (equivalent read)
+- read - view list of users in org
+- execute on x
+
+teams:
+- belongs to organization, but cannot be assigned roles on organization object. it happens on user level
+- can get perms on ressources from organization
+- only in one organization
+
+user roles for team:
+- member - inherit teams roles. most common
+- admin - full control on team
+- read - just see teams users and roles
+
+can only add user with member role via gui. for admin/read - use cli
+
+adding admin/read role to user in team, other than member:
+- install tower-cli (pip, then pip install ansible-tower-cli)
+tower-cli role grant --user 'daniel' --target-team 'Developers'  --type 'admin'

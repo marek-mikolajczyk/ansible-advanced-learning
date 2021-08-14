@@ -1,0 +1,24 @@
+# src of project
+- local - copy code to PROJECTS_ROOT path in /etc/tower/settings.py
+
+# scm credentials
+private or assigned to organization
+
+# update project
+
+cleanup potential manual modifications:
+- clean - remove local modifications before update
+- delete on update
+
+- update
+  if project has 'update on launch', but user doesn't have 'update' role - project will still get updated
+  <project-root>/roles/requirements.yml - if listed here, they are getting updated as last step of update
+  # ansible-galaxy install -r roles/requirements.yml -p ./roles/ --force
+
+
+# job templates
+- users need 'use' role on inventory,project,credentials
+- users need execute on job template, and get automatically granted use on all resources
+
+job template options:
+- forks - parallel process during playbook execution

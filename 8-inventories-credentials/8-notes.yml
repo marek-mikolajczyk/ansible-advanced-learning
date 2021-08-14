@@ -1,0 +1,8 @@
+children groups  == associated groups in tower gui
+
+inventory vars are overriden by job template and playbook vars
+
+# public/private credentials
+private credentials - when added to organization, everyone can use them
+
+# password stored in tower, or prompt on launch (doesn't work with schedule)

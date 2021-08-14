@@ -1,0 +1,20 @@
+# fact caching
+use one scheduled job to cache facts, rest of playbooks gather_factS: false
+- per job facts cache
+- global facts cache - in settings/jobs/per-host fact. 0 - always valid
+
+#surveys
+
+tower doesn't accept vars_prompt.
+use extra vars static or extra vars prompt on launch
+
+survey sets extra variables.
+survey is equivalent of extra vars, not vars_prompt (higher precedence)
+survey overrides extra vars
+
+# workflow
+extra vars (from extra vars or survey) are available during whole play
+
+# schedules
+- on job level (execute permissions needed)
+- on tower maintenance tasks
