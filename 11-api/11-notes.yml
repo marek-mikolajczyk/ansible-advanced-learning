@@ -3,15 +3,23 @@ handle space in url:
 - %20
 - | urlencode
 
+# test api response 
+
+/api/v2/ping
+
+# check what was done on Tower
+/activity_stream > last page (?page=last)
+
 GET
 POST - sends body to existing resource
 PUT - modify resource 
-PATCH - modify. only listed entities are modified
+PATCH - modify/update. only listed entities are modified
 DELETE
 
-sent information to api:
+# sent information to api:
 - src - points to file
 - body
+
 
 uri module parameters:
 body_format - depends
@@ -19,8 +27,10 @@ body_format - depends
 handle api response:
 status_code - which status to expect
 dest - save response to file
-return_content:yes - use response in playbook
+return_content:yes - use response in playbook + register
 
+
+# get a list of jobs
 curl -X GET (--request)  -s  (--silent) --user user:password https://tower/api/v2/  <-- lookout slash at the end
 curl -X get xxx | json_pp to get better view
 
@@ -28,6 +38,10 @@ OUTPUT IS PAGINATED - check previous/next
 
 https://tower.marekexample.com/api/v2/users/?username__contains=david
 
+# find a job BY NAME
+job_templates/?name="aaa bbb"
+
+-X GET  https://tower.marekexample.com/api/v2/job_templates/?name="Demo Job Template" | json_pp
 
 # start a job
 curl -k --user admin:password -X POST https://tower.marekexample.com/api/v2/job_templates/5/launch/
@@ -35,11 +49,24 @@ number of job -  field "job"
 get status of ran job:
 curl -k --user admin:password -X GET  https://tower.marekexample.com/api/v2/jobs/8/ | json_pp
 
+!!! note the id in POST output
+!!! url to job is given in output
+
+# check job status started via api
+
 # start job via api from playbook
 - add tower vars
 
 
+# uri module
+- return_content
+- status_code
+- force_basic_auth / headers (token)
+
+
+
 # tokens for api
+Tower - application aggregates tokens
 AT - multiple users, create application
 PAT - private
 
@@ -48,3 +75,8 @@ url/force_basic_auth
 register output
 2. use token
 uri/headers and answer['json']['token']
+
+
+# uri module copy  job template
+- /copy/ 
+- POST

@@ -1,7 +1,15 @@
 import static inventory
 1. from file - make chages in tower
+
+awx-manage
 2. from scm - make changes on scm not tower
   a) update_on_project_change
+  b) !! type name of file if file isn't discovered. 
+     .yml didn't work for me
+
+3. from custom script - remember to add overwrite
+
+4. smart inventory - use fact cache
 
 cli: awx-manage inventory_import
 
