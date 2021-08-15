@@ -91,4 +91,7 @@ git push --set-upstream origin <original repo> feature/2 <branch>
 
 
 ### submodules
-in roles, add .gitignore with roles/*/* to exclude all downladed from galaxy
+
+don't use submodules.
+add roles/*/* to gitignore
+to exclude all downladed from galaxy
