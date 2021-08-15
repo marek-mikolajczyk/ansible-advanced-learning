@@ -1,18 +1,19 @@
 vi:
 set et ts=2 sts=2 sw=2
+set number
 set paste
 
 install:
 - json_pp - for tower api |json_pp chapter 11. rpm: perl-JSON-PP
 - pip install ansible-tower-cli
-- pip install ansible-lint
+- pip install ansible-lint, yamllint
 
 
 clean yaml
 - : not = long lines
 - modules instead of shell
 - clear variables name 
-- vars namespace
+- vars namespace - prefix variables with role name
 - dynamic inventories, group_by
 - duplicated group vars - last wins
 - use block to rescue
@@ -43,11 +44,12 @@ commited
 
 configure git
 git config --global -l
+~/.gitconfig
 
 git init --bare --shared=true - no working tree
 git config --global push.default simple
-
 git config --global -l - lists all settings
+
 git status
 git log
 git show <commit hash>
@@ -64,11 +66,17 @@ git pull - fetches commits, merges changes into files
 # branches
 HEAD - current commit in local
 
+### switch branch
+git checkout 
+
 - create new branch and work there
 git branch <new branch> - creates new branch, but doesn't make it HEAD
 - move HEAD to new branch
 git checkout 
 - checkout to master and merge
+
+# creates branch from old commit 
+- git checkout <old short commit >
 
 ### merge branched
 push to dev
