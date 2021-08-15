@@ -60,6 +60,7 @@ git rev-parse --short HEAD
 git rm - deletes file from local dir, and 
 git reset - removes file from staging area
 git revert commit_ref - 
+git rever --no-edit HEAD
 
 git pull - fetches commits, merges changes into files
 
