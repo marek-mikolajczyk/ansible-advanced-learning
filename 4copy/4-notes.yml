@@ -59,9 +59,19 @@ replace('ar','**')
 
 ### vars
 # mandatory
+
 # default 
-#   * default(my_default, True) - if initial value was empty or false - it will set to expected
-#   * default(omit) - skips task parameter if not defined
+
+Filters don't create variable. But True/False gives that possibility.
+if we (T), then ansible defines variable on empty/null var. 
+If (F), ansible doesnt' try to define empty/null and result staus empty
+
+default(my_default, True) + initial value empy(null)/False - set to default
+default(my_default, False) + inital value empty/False - stay empty/False
+!!! default(omit) - stay undefined. skip parameter in module
+
+undefined var - playbook fails
+
 
 
 ### math
@@ -77,12 +87,12 @@ replace('ar','**')
 # | sort, | reverse, | shuffle
 # | flatten for nested lists
 # | unique. after lists have no duplicated values, then
-#   | union, |intersect, | difference
+#  !!! no duplicated elements - then this will work  | union, |intersect, | difference
 # to dictionary: | items2dict
 
 
 ### dictionaries
-# combine - 2nd dictionary has bigger priority
+# combine - 2nd dictionary has higher priority
 # to list: | dict2items
 
 # hashing
@@ -94,7 +104,24 @@ replace('ar','**')
 # to_json, to_nice_json
 # to_yaml, to_nice_yaml
 
+# map filter
 
+map - apply filter on sequenceof objects or lookup attribute
+https://jinja.palletsprojects.com/en/2.10.x/templates/#map
+
+1.you have a list of users but you are only interested in a list of usernames:
+or facts and want to see only devices of mounts
+
+{{ ansible_mounts | map(attribute='device') }}
+{{ ansible_mounts | map(attribute='device') | join(',') }}
+
+['/dev/sdb', '/dev/sdd', '/dev/sdc', '/dev/loop0']
+/dev/sdb,/dev/sdd,/dev/sdc,/dev/loop0
+
+
+2. alternatively, use map filter to invoke a filter with arguments
+
+{{ ansible_mounts | map(attribute='device') | map('upper') }}
 
 ########################
 ### lookup plugins

@@ -1,0 +1,13 @@
+-  map filter has 2 usages - either get attribute, or use another filter with it's parameters
+- default, True if you want to change false/null var. if you want to leave it empty/null - use default, False
+- default(omit) also has True/False
+
+- combine lists with union, dictionaries with combine
+
+- move vars from default/main.yml to group_vars or host_vars
+
+- estimate if you need list. if yest, add | list
+
+- query('pipe') vs query('lines') - is for command lines. think about it
+
+- errors in lookup might be many, so we use errorS . we can be STRICT, we can IGNORE, or we just WARN
