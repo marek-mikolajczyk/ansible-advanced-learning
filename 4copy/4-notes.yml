@@ -167,14 +167,14 @@ password - generate random password
 ### advanced loops
 ########################
 
-loop - on flat list
+loop - always over flat list
 
 # previously - with_<lookup plugin>
 
 # loop: "{{ mylist }}" = with_list: "{{ mylist }}" = loop: "{{ lookup('list', mylist) }}"
 
 
-### list of lists = flatten(levels=1)
+### list of lists = flatten(levels=1) LOL-F
 to move from with_items, create new variable with lists inside, the use flatten
 "{{ list_of_lists | flatten(levels=1) }}"
 
@@ -190,7 +190,7 @@ vars:
     - "{{ app_b_tmp_files }}"
     - "{{ app_c_tmp_files }}"
 
-### list of nested lists (with dictionaries) = subelements
+### list of nested lists (with dictionaries) = subelements LNL-S
 LDL = subelements
 [{[x]}]
 subelements create single list from lists with nested lists
@@ -231,3 +231,8 @@ msg: "{{ query('fileglob', '~/.bash*') }}" - query will return a list
 before
  with_fileglob:
  - "~/.bash*"
+
+
+ ##################
+ ## network
+ ##################
