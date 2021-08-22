@@ -17,7 +17,7 @@
 - execute on x
 
 teams:
-- belongs to organization, but cannot be assigned roles on organization object. it happens on user level
+- belongs to organization, but cannot be assigned roles on organization !object. it happens on user level
 - can get perms on ressources from organization
 - only in one organization
 
