@@ -1,3 +1,5 @@
+- git pull !!!
+
 -  map filter has 2 usages - either get attribute, or use another filter with it's parameters
 * {{ public_key_lists | map(attribute='public_keys') | flatten }} 
 - default, True if you want to change false/null var. if you want to leave it empty/null - use default, False
@@ -22,3 +24,5 @@
 
 - Tower organization - TPI=O
 - for organizoation object permissions, only users not teams
+
+- import inventories via awx-manage - inventory must exist
