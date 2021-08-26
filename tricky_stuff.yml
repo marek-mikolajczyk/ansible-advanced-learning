@@ -1,6 +1,6 @@
-- git pull !!!
+- git pull when coming back to repo folder!!!!
 
--  map filter has 2 usages - either get attribute, or use another filter with it's parameters
+-  map filter has 2 usages - either get attribute bez S, or use another filter with it's parameters
 * {{ public_key_lists | map(attribute='public_keys') | flatten }} 
 - default, True if you want to change false/null var. if you want to leave it empty/null - use default, False
 - default(omit) also has True/False
@@ -8,6 +8,8 @@
 - subelements - LNL-S has a tip with old syntax with_subelements
 
 - LOL-F, LNL-S, LDL-M
+
+- list filters union/intersect/difference when NO DUPLICATED elements (=unique)
 
 - together lists with union, dictionaries with combine
 
@@ -18,7 +20,7 @@
 - query('pipe') vs query('lines') - is for command lines. think about it
 
 - errors in lookup might be many, so we use errorS . we can be STRICT, we can IGNORE, or we just WARN
-
+.;
 - batches like max_fail_percentage: 30% or even max_fail_percentage: 0 very very strics
 
 
@@ -26,3 +28,15 @@
 - for organizoation object permissions, only users not teams
 
 - import inventories via awx-manage - inventory must exist
+
+- privilege escalation can be enabled in inventory (ansible_become), and this will override playbook
+
+- meta: flush_handlers
+- listen to handlers!
+
+- order of hosts: as in INVENTORY, alphabeticaly SORTED
+
+--tags tagged/untagged
+never/always as tag
+
+- callback plugin: PROFILE tasks or TIMER them
