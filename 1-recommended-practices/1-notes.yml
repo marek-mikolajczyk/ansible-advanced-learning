@@ -7,7 +7,7 @@ install:
 - json_pp - for tower api |json_pp chapter 11. rpm: perl-JSON-PP
 - pip install ansible-tower-cli
 - pip install ansible-lint, yamllint
-- yum install -y python3-dns
+- yum install -y python3-dns python3-netaddr
 
 
 clean yaml
