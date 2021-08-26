@@ -18,7 +18,7 @@ random
 unique | list
 sort
 min,max,sum
-lenght,first,last
+length,first,last
 #FLATTEN - merge sub lists
 
 # multiple lists
@@ -103,6 +103,7 @@ undefined var - playbook fails
 # json_query('[*].name')
 # to_json, to_nice_json
 # to_yaml, to_nice_yaml
+# from_yaml, from_json
 
 # map filter
 
