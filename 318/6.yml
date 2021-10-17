@@ -1,0 +1,27 @@
+aaaa
+logical networks - datacenter, need vlan
+2 types: 
+- vm network
+- infra network. 
+
+1 linux bridge per logical network
+bridge connects virtual and physical network
+
+infra networks don't have linux bridge. at cluster level
+
+
+networks are required - must connect on every host in cluster, always operational
+
+created in datacenter, assigned by clusters
+
+add networks to hosts from host menu
+labels fro auto adding (on host and on vlan)
+
+more that one network on host's nic - vlan tag required
+
+
+
+
+[root@host ~]# yum update
+[root@host ~]# yum install vdsm-hook-openstacknet
+[root@host ~]# iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited

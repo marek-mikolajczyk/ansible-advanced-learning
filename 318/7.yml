@@ -1,0 +1,20 @@
+aaaa
+on fs -all objects are files
+on block - all objects are lv
+
+snapshot always sparse
+
+SPM - can modify data storage, coordinates metadata. one spm per dc. other hosts read only metadata
+all hosts write objects, but configuraton only spm changes
+choose by history (last one), then random
+
+raw is faster to use than qcow2.
+this - desktops
+raw - servers
+
+data domain connected to only 1 dc at time
+iso domain - multiple dc, supports fs only
+export - only one dc, fs only
+
+
+configuration > providers to add openstack

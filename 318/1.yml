@@ -1,0 +1,22 @@
+storage:
+- fs (nfs, gluster) - creates FS
+- block (iscsi) - creates LVM
+
+storage domains:
+- data: vm disks, templates, iso, export. can be migrated between datacenters
+- iso: iso. nfs only
+- export: one datacenter at time. nfs only
+
+types of hosts:
+- rhv-h (minimal iso)
+- rhel
+
+vdsm:
+- on rhv host
+- communication with manager
+
+repos: 
+- rhvh-4
+
+systemd:
+- ovirt-engine

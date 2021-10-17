@@ -1,0 +1,27 @@
+1. configure auth provider
+2. configure mapping (grant roles)
+
+user - action on - object
+multiple permissions = role
+
+entity - identified user performing action
+
+jdbc tool
+then restart ovirt-engine
+ovirt-engine +tab to aaa extension
+URL method for ca
+no sso
+
+user roles
+PowerUserRole - manage vm and templates
+UserVmManager - manage vm and snapshot
+
+UserRole - can see vm
+UserVmManager - full control
+PowerUserRole - can you only your vms
+
+
+add permissions on resource level
+
+reset admin password
+ovirt-aaa

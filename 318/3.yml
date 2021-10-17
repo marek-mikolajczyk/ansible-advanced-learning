@@ -1,0 +1,20 @@
+1. create dc
+1. add mac address pool via menu > administration
+2. create network and assign to all hosts / choose current and change later
+2. create cluster
+
+
+aaaa
+dc 
+dc storage - 
+local - one cluster one host
+shared - multiple clusters
+
+cluster - hosts with same cpu. use clusters to separate hardware
+
+enable virt service - vms will be ran on this network or gluster
+
+migration policy - when to migrate
+scheduling policy - where to start vm
+
+mac pools - needed for migration from vmware (includes existing)

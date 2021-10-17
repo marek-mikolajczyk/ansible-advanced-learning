@@ -1,0 +1,10 @@
+maintenance mode, take care of any vdsm actions
+
+wait for host removed in events
+
+change cluster by remove/add host - 15 minutes
+
+tftp
+1. download iso and rpm2cpio
+
+prepare kickstart chapter, rpm2cpio

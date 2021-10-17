@@ -1,0 +1,26 @@
+RHV datacenter up:
+- cluster
+- host up
+- storage data domain
+
+upload iso:
+- ovirt-imageio-proxy running
+- systemctl status/enable nfs-server, firewalld nfs, exportfs
+- owner vdsm:kvm(36) 755
+
+remote console
+- yum install -y virt-viewer
+
+
+new vm disk
+idea
+virtio - /dev/vdX
+virtio-scsi - /dev/sdX
+
+disk profile - max io
+must be manually assigned to disks 
+
+
+=====
+install from iso takes 15 minutes, starting also few minutes
+remember about packages to install (virt-viewer) and check nfs server

@@ -1,0 +1,10 @@
+aaaa
+guest agents are installed to improve management and performance
+guest driver
+info about guest
+poweroff/on
+guest drivers for virtio-x
+
+systemctl qemu-guest-agent
+
+windows - 3 agents
