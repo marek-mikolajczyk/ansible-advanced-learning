@@ -3,3 +3,7 @@
 edit inventory file
 set passwords for tower, postgres, mq
 activity streams
+
+
+# users
+admin or read team role - use cli
