@@ -1,0 +1,49 @@
+aaa
+
+qemu agent for windows iso is in rhv manager repo
+
+- new vm
+- clone (sealed!)
+- template
+
+vm > resource > memory baloon
+
+kickstart takes time
+
+install and enable qemu-guest-agent
+
+host pinning - host
+ha
+
+clone vm - separate or dependant (overlay)
+
+numa - non-uniform memory access . pins to physical numa nodes
+means big vm that cannot fit in single host socket can be spreat across numa nodes
+
+
+with templates, ksm (kernel samepage memory) works 
+sealing - remove host keys, mac address
+virt-sysprep on linux powered off (sealing in rhv)
+sysprep.exe on windows powered off
+base vm to make templates - seal in then never start again
+
+template takes time 
+
+
+cloud init starts during boot and looks for instructions
+add to initial run of new template, edit template
+add to initial run in 'run once'
+
+host name, time zone, authentication and network properties, and for running customer cloud-init scripts.
+
+template inherits init run
+template edit
+
+cloud init uses yaml, but it's not ansible
+
+
+some changes of cloud init are persistend, even if used with run once (hostname, timezone, users with passwords, custom scripts)
+network settings are not persistent (write_files) override this
+
+
+yum install -y cloud-init && systemctl poweroff

@@ -1,0 +1,20 @@
+users
+
+1. to connect to ipa - ovirt-aaa-...extension..., because its and extension
+then restart ovirt-engine!!!!
+2. to create users/manage ovirt-aaa-jdbc-tool because it's tool to manage users/passwords
+
+change cluster = remove host
+wait for correct msg in events
+
+adding host takes time!!!!
+
+rpm2cpio oneliner!!!!
+
+
+networks extra providers - use hooks
+[root@host ~]# yum update
+[root@host ~]# yum install vdsm-hook-openstacknet
+[root@host ~]# iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited
+
+create dc - create cluster - have a host in correct dc,cluster > create network in cluster

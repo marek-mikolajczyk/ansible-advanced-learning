@@ -1,0 +1,20 @@
+ch 2
+
+remember about hosted-engine on the host
+
+oh rhvm
+systemct - if is enabled and running
+
+configure nfs (firewall, exports, service)
+36:36 (vdsm:kvm)
+
+
+upload iso to disk
+
+install virt-viewer
+
+takes time!
+downloading qco2, iso
+installing vm 
+
+qcow - mark OS when attaching to vm!
