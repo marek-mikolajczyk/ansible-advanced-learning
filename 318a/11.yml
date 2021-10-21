@@ -1,0 +1,49 @@
+uuu
+
+
+engine-backup doesn't bkp os or apps
+
+scope=all
+
+
+first maintenance mode
+then backup
+then cleanup !!
+restore, scope all and permisions funny parameters
+then engine-setup
+
+engine-setup --accept-defaults --offline
+stop maintenance
+
+BACKUP: 
+maintenance global
+backup
+engine-cleanup
+restore scope=all --permissions --log --scope --file --mode
+engine setup --accept --offline  log must be there!!!!
+maintenance none
+
+upgrade:
+maintenance global
+engine-upgrade-check on rhvm
+update ovirt\*setup\*
+engine-setup
+yum update for os
+maintenance none
+
+hosts
+enable repo
+engine-config -s host...
+
+
+high availability vms
+fencing on host + HA by storage
+
+auto restart when host fails
+fencing required
+
+non operational - rhvm cann communiate
+non responsive - worse
+
+fence agent 
+fence proxy - other host

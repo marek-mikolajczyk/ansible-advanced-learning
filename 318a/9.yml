@@ -1,0 +1,19 @@
+uuu
+The virtual machine must not have the cache!=none custom property set.
+Live migration requires a disabled virtual machine cache 
+
+
+automated migration and scheduling policy
+
+loadbalancing cluster policy - to move or not to move. runs every minute
+scheduling - who goes first?
+ha = vm automatically restarted
+
+3x migration policy
+resilience  = host failure
+
+scheduling - when hosts meed max of conditions, they don't run more vm
+
+
+ Migration Policy is Minimal downtime, and the Resilience Policy is Migrate Virtual Machine
+ 
